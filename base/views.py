@@ -2,25 +2,25 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 def Home(request):
-    return HttpResponse("Home page")
+    return render(request, 'home.html')
 
 
 def Me(request):
-    return HttpResponse("Informace o mě")
+    return render(request, 'Infoome.html')
 
 
 def Pracovnizkus(request):
-    return HttpResponse("Pracovní zkušenosti")
+    return render(request, 'Pracovnizkusenosti.html')
 
 
 def Studium(request):
-    return HttpResponse("Studium")
+    return render(request, 'Studium.html')
 
 
 def Vlastnosti(request):
-    return HttpResponse("Vlastnosti")
+    return render(request, 'Vlastnosti')
 
 
 def Zajmy(request):
-    return HttpResponse("Zájmy")
+    return render(request, 'Zájmy.html')
 # Create your views here.
