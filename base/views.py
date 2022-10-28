@@ -1,7 +1,8 @@
 from django.shortcuts import render
 
 def Home(request):
-    return render(request, 'home.html')
+    context = {'infoome': infoome , 'prac': prac, 'stud': stud, 'vlas': vlas, 'zaj': zaj}
+    return render(request, 'home.html', context)
 
 
 def Me(request):
@@ -22,4 +23,28 @@ def Vlastnosti(request):
 
 def Zajmy(request):
     return render(request, 'Zájmy.html')
+
+
+# def room(request):
+ #   return render(request, 'room.html')
+
+
+infoome = [
+    {'id':1, 'name': 'Základní informace o mé osobě.'},
+]
+prac = [
+    {'id':2, 'name': 'Mé dosavadní pracovní zkušenosti.'},
+]
+
+stud= [
+    {'id':3, 'name': 'Studium.'},
+]
+
+vlas = [
+    {'id':4, 'name': 'Mé vlastnosti schopnosti.'},
+]
+
+zaj = [
+    {'id':5, 'name': 'Mé zájmy.'},
+]
 # Create your views here.
