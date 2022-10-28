@@ -2,7 +2,7 @@ from django.shortcuts import render
 
 def Home(request):
     context = {'infoome': infoome , 'prac': prac, 'stud': stud, 'vlas': vlas, 'zaj': zaj}
-    return render(request, 'home.html', context)
+    return render(request, 'base/home.html', context)
 
 
 def Me(request):
