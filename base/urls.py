@@ -3,10 +3,10 @@ from . import views
 
 urlpatterns = [
     path('', views.Home, name="Domovskástránka"),
-    path('Infoomě/', views.Me, name="Me"),
-    path('pracovnizkusenosti/', views.Pracovnizkus, name="pracovnizkusenosti"),
-    path('Studium/', views.Studium, name="Studium"),
-    path('Vlastnosti/', views.Vlastnosti, name="Vlastnosti"),
-    path('Zajmy/', views.Zajmy, name="Zajmy"),
+    path('Infoomě/<str:pk>/', views.Me, name="Infoomě"),
+    path('pracovnizkusenosti/<str:pk>/', views.Pracovnizkus, name="pracovnizkusenosti"),
+    path('Studium/<str:pk>/', views.Studium, name="Studium"),
+    path('Vlastnosti/<str:pk>/', views.Vlastnosti, name="Vlastnosti"),
+    path('Zajmy/<str:pk>/', views.Zajmy, name="Zajmy"),
 ]
   

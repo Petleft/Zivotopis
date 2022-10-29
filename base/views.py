@@ -1,3 +1,4 @@
+from multiprocessing import context
 from django.shortcuts import render
 
 def Home(request):
@@ -5,24 +6,49 @@ def Home(request):
     return render(request, 'base/home.html', context)
 
 
-def Me(request):
-    return render(request, 'Infoome.html')
+def Me(request, pk):
+    me = None
+    for i in infoome:
+        if i['id'] == int(pk):
+            me = 1
+    context = {'me': me}
+    return render(request, 'Infoome.html', context)
 
 
-def Pracovnizkus(request):
-    return render(request, 'Pracovnizkusenosti.html')
+def Pracovnizkus(request, pk):
+    Prac = None
+    for i in prac:
+        if i['id'] == int(pk):
+            Prac = 1
+    context = {'Prac': Prac}
+    return render(request, 'Pracovnizkusenosti.html', context)
 
 
-def Studium(request):
-    return render(request, 'Studium.html')
+def Studium(request, pk):
+    Studs = None
+    for i in stud:
+        if i['id'] == int(pk):
+            Studs= 1
+    context = {'stud': stud}
+    return render(request, 'Studium.html', context)
 
 
-def Vlastnosti(request):
-    return render(request, 'Vlastnosti')
+def Vlastnosti(request, pk):
+    Vlas = None
+    for i in vlas:
+        if i['id'] == int(pk):
+            Vlas = 1
+    context = {'Vlas': Vlas}
+    return render(request, 'Vlastnosti.html', context)
 
 
-def Zajmy(request):
-    return render(request, 'Zájmy.html')
+def Zajmy(request, pk):
+    Zajm = None
+    for i in zaj:
+        if i['id'] == int(pk):
+            Zajm = 1
+    context = {'Zajm': Zajm}
+    return render(request, 'Zájmy.html', context)
 
 
 # def room(request):

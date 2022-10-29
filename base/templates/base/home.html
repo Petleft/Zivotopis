@@ -9,31 +9,31 @@
     <div>
         {% for infoome in infoome  %}
         <div>
-            <h5>{{infoome.name}}</h5>
+            <h5><a href="/Infoomě/{{infoome.id}}">{{infoome.name}}</a></h5>
         </div>
         {% endfor %}
 
         {% for prac in prac %}
         <div>
-            <h5>{{prac.name}}</h5>
+            <h5><a href="/pracovnizkusenosti/{{prac.id}}">{{prac.name}}</a></h5>
         </div>
         {% endfor %}
 
         {% for stud in stud %}
         <div>
-            <h5>{{stud.name}}</h5>
+            <h5><a href="/Studium/{{stud.id}}">{{stud.name}}</a></h5>
         </div>
         {% endfor %}
 
         {% for vlas in vlas %}
         <div>
-            <h5>{{vlas.name}}</h5>
+            <h5><a href="/Vlastnosti/{{vlas.id}}">{{vlas.name}}</a></h5>
         </div>
         {% endfor %}
 
         {% for zaj in zaj %}
         <div>
-            <h5>{{zaj.name}}</h5>
+            <h5><a href="/Zajmy/{{zaj.id}}">{{zaj.name}}</a></h5>
         </div>
         {% endfor %}
     
