@@ -2,7 +2,7 @@ from multiprocessing import context
 from django.shortcuts import render
 
 def Home(request):
-    context = {'infoome': infoome , 'prac': prac, 'stud': stud, 'vlas': vlas, 'zaj': zaj}
+    context = {'infoome': infoome , 'prac': prac, 'stud': stud, 'vlas': vlas, 'zaj': zaj, 'nab': nab}
     return render(request, 'base/home.html', context)
 
 
@@ -51,9 +51,18 @@ def Zajmy(request, pk):
     return render(request, 'Zájmy.html', context)
 
 
-# def room(request):
- #   return render(request, 'room.html')
+def Nabidky(request, pk):
+    Nabid = None
+    for i in nab:
+        if i['id'] == int(pk):
+            Nabid = 1
+    context = {'Nabid': Nabid}
+    return render(request, 'Nabidky.html', context)
 
+
+nab = [
+    {'id':0, 'name': 'Nabídky Práce'},
+]
 
 infoome = [
     {'id':1, 'name': 'Základní informace o mé osobě.'},
