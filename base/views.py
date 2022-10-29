@@ -64,6 +64,11 @@ def room(request, pk):
     return render(request, 'room.html', context)
 
 
+def Vytvornabidku(request):
+    context = {}
+    return render(request, 'base/uprava_nabidky.html', context)
+
+
 nab = [
     {'id':0, 'name': 'Seznam nabídek práce'},
 ]

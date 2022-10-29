@@ -10,5 +10,6 @@ urlpatterns = [
     path('Zajmy/<str:pk>/', views.Zajmy, name="Zajmy"),
     path('Nabidky/<str:pk>/', views.Nabidky, name="Nabidkyprace"),
     path('Nabidky/room/<str:pk>', views.room, name="room"),
+    path('create-room/', views.Vytvornabidku, name="Vytvoreninabidky"),
 ]
   
