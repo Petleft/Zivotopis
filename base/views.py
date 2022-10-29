@@ -1,5 +1,6 @@
 from multiprocessing import context
 from django.shortcuts import render
+from .models import Nabidky,Room
 
 def Home(request):
     context = {'infoome': infoome , 'prac': prac, 'stud': stud, 'vlas': vlas, 'zaj': zaj, 'nab': nab}
@@ -10,7 +11,7 @@ def Me(request, pk):
     me = None
     for i in infoome:
         if i['id'] == int(pk):
-            me = 1
+            me = i
     context = {'me': me}
     return render(request, 'Infoome.html', context)
 
@@ -19,7 +20,7 @@ def Pracovnizkus(request, pk):
     Prac = None
     for i in prac:
         if i['id'] == int(pk):
-            Prac = 1
+            Prac = i
     context = {'Prac': Prac}
     return render(request, 'Pracovnizkusenosti.html', context)
 
@@ -28,7 +29,7 @@ def Studium(request, pk):
     Studs = None
     for i in stud:
         if i['id'] == int(pk):
-            Studs= 1
+            Studs= i
     context = {'stud': stud}
     return render(request, 'Studium.html', context)
 
@@ -37,7 +38,7 @@ def Vlastnosti(request, pk):
     Vlas = None
     for i in vlas:
         if i['id'] == int(pk):
-            Vlas = 1
+            Vlas = i
     context = {'Vlas': Vlas}
     return render(request, 'Vlastnosti.html', context)
 
@@ -46,22 +47,33 @@ def Zajmy(request, pk):
     Zajm = None
     for i in zaj:
         if i['id'] == int(pk):
-            Zajm = 1
+            Zajm = i
     context = {'Zajm': Zajm}
     return render(request, 'Zájmy.html', context)
 
 
 def Nabidky(request, pk):
-    Nabid = None
-    for i in nab:
-        if i['id'] == int(pk):
-            Nabid = 1
-    context = {'Nabid': Nabid}
+    #rooms = Room.objects.all()
+    context = {'rooms': rooms}
     return render(request, 'Nabidky.html', context)
 
 
+def room(request, pk):
+    room = None
+    for i in rooms:
+        if i['id'] == int(pk):
+            room = i
+    context = {'room': room}
+    return render(request, 'room.html', context)
+
+rooms =[
+    {'id': 1, 'name': 'Nabídka práce1'},
+    {'id': 2, 'name': 'Nabídka práce2'},
+    {'id': 3, 'name': 'Nabídka práce3'},
+]
+
 nab = [
-    {'id':0, 'name': 'Nabídky Práce'},
+    {'id':0, 'name': 'Seznam nabídek práce'},
 ]
 
 infoome = [
