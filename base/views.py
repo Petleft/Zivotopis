@@ -1,6 +1,6 @@
 from multiprocessing import context
 from django.shortcuts import render
-from .models import Nabidky,Room
+from .models import Room
 
 def Home(request):
     context = {'infoome': infoome , 'prac': prac, 'stud': stud, 'vlas': vlas, 'zaj': zaj, 'nab': nab}
@@ -53,24 +53,16 @@ def Zajmy(request, pk):
 
 
 def Nabidky(request, pk):
-    #rooms = Room.objects.all()
+    rooms = Room.objects.all()
     context = {'rooms': rooms}
     return render(request, 'Nabidky.html', context)
 
 
 def room(request, pk):
-    room = None
-    for i in rooms:
-        if i['id'] == int(pk):
-            room = i
+    room = Room.objects.get(id=pk)
     context = {'room': room}
     return render(request, 'room.html', context)
 
-rooms =[
-    {'id': 1, 'name': 'Nabídka práce1'},
-    {'id': 2, 'name': 'Nabídka práce2'},
-    {'id': 3, 'name': 'Nabídka práce3'},
-]
 
 nab = [
     {'id':0, 'name': 'Seznam nabídek práce'},
