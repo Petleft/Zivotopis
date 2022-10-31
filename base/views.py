@@ -93,7 +93,6 @@ def Upraveninabidky(request, pk):
 def Smazaninabidky(request, pk):
     room = Room.objects.get(id=pk)
     if request.method == 'POST':
-        room = Room.objects.get(id=pk)
         room.delete()
         return redirect('/Nabidky/0')
     context = {'obj': room}
