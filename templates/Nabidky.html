@@ -7,10 +7,10 @@
     <a href="{% url 'Vytvoreninabidky' %}">Vložení nabídky práce.</a>
 
     <div>
-        {% for room in rooms  %}
+        {% for room in rooms %}
         <div>
             <span>@{{room.host.username}}</span>
-            <h5><a href="/Nabidky/room/{{room.id}}">{{room.name}}</a></h5>
+            <h5><a href="/Nabidky/room/{{room.id}}">{{room.Nazev_pozice}}</a></h5>
             <small>{{room.typprace.name}}</small>
             <hr>
         </div>

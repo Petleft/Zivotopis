@@ -2,7 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 
-from .models import Room, Typ, Message, Plath, Platm, Hodinyd, Hodinym
+from .models import Room, Typ, Plath, Platm, Hodinyd, Hodinym
 
 
 admin.site.register(Room)

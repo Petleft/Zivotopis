@@ -1,6 +1,6 @@
-from multiprocessing import context
 from django.shortcuts import render
 from .models import Room
+from .forms import RoomForm
 
 def Home(request):
     context = {'infoome': infoome , 'prac': prac, 'stud': stud, 'vlas': vlas, 'zaj': zaj, 'nab': nab}
@@ -65,7 +65,8 @@ def room(request, pk):
 
 
 def Vytvornabidku(request):
-    context = {}
+    form = RoomForm()
+    context = {'form': form}
     return render(request, 'base/uprava_nabidky.html', context)
 
 

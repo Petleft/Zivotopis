@@ -38,20 +38,36 @@ class Hodinym(models.Model):
         return self.name
 
 
+#class Room(models.Model):
+#    host = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+#    typprace = models.ForeignKey(Typ, on_delete=models.SET_NULL, null=True)
+#    name = models.CharField(max_length=200)
+#    plathodinovy = models.ForeignKey(Plath, on_delete=models.SET_NULL, null=True)
+#    platmesicni = models.ForeignKey(Platm, on_delete=models.SET_NULL, null=True)
+#    hodinyden = models.ForeignKey(Hodinyd, on_delete=models.SET_NULL, null=True)
+#    hodinymesic = models.ForeignKey(Hodinym, on_delete=models.SET_NULL, null=True)
+#    description = models.TextField(null=True, blank=True)
+#    updated = models.DateTimeField(auto_now=True)
+#    created = models.DateTimeField(auto_now_add=True)
+#
+#    def __str__(self):
+#        return self.name
+
+
 class Room(models.Model):
-    host = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-    typprace = models.ForeignKey(Typ, on_delete=models.SET_NULL, null=True)
-    name = models.CharField(max_length=200)
-    plathodinovy = models.ForeignKey(Plath, on_delete=models.SET_NULL, null=True)
-    platmesicni = models.ForeignKey(Platm, on_delete=models.SET_NULL, null=True)
-    hodinyden = models.ForeignKey(Hodinyd, on_delete=models.SET_NULL, null=True)
-    hodinymesic = models.ForeignKey(Hodinym, on_delete=models.SET_NULL, null=True)
-    description = models.TextField(null=True, blank=True)
+    Zadávající = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    typ_práce = models.CharField(max_length=30)
+    Nazev_pozice = models.CharField(max_length=20)
+    Hodinový_plat = models.CharField(max_length=10, blank=True)
+    Měsíční_mzda = models.CharField(max_length=10, blank=True)
+    Hodiny_za_den = models.CharField(max_length=10, blank=True)
+    Hodiny_za_měsíc = models.CharField(max_length=10, blank=True)
+    popis_práce = models.TextField(null=True, blank=True)
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.name
+        return self.typ_práce
 
 
 class Message(models.Model):
