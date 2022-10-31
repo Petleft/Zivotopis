@@ -1,6 +1,8 @@
-from django.shortcuts import render
+from django.http import HttpResponseRedirect
+from django.shortcuts import render, redirect
 from .models import Room
 from .forms import RoomForm
+
 
 def Home(request):
     context = {'infoome': infoome , 'prac': prac, 'stud': stud, 'vlas': vlas, 'zaj': zaj, 'nab': nab}
@@ -66,8 +68,35 @@ def room(request, pk):
 
 def Vytvornabidku(request):
     form = RoomForm()
+    if request.method == 'POST':
+        form = RoomForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('Nabidkyprace')
+
     context = {'form': form}
     return render(request, 'base/uprava_nabidky.html', context)
+
+
+def Upraveninabidky(request, pk):
+    room = Room.objects.get(id=pk)
+    form = RoomForm(instance=room)
+
+    if request.method == 'POST':
+        form = RoomForm(request.POST, instance=room)
+        if form.is_valid:
+            form.save()
+            return redirect('/')
+    context = {'form': form}
+    return render(request, 'base/uprava_nabidky.html', context)
+
+
+def Smazaninabidky(request, pk):
+    room = Room.objects.get(id=pk)
+    if request.method == 'POST':
+        room.delete()
+        return redirect('Domovskástránka')
+    return render(request, 'base/Vymazani.html', {'obj': room})
 
 
 nab = [

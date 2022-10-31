@@ -11,5 +11,7 @@ urlpatterns = [
     path('Nabidky/<str:pk>/', views.Nabidky, name="Nabidkyprace"),
     path('Nabidky/room/<str:pk>', views.room, name="room"),
     path('create-room/', views.Vytvornabidku, name="Vytvoreninabidky"),
+    path('update-room/<str:pk>/', views.Upraveninabidky, name="Upraveninabidky"),
+    path('delete-room/<str:pk>/',views.Smazaninabidky, name="Smazaninabidky"),
 ]
   

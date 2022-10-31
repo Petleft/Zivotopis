@@ -9,6 +9,8 @@
     <div>
         {% for room in rooms %}
         <div>
+            <a href="{% url 'Upraveninabidky' room.id %}">Upravit nabídku práce</a>
+            <a href="{% url 'Smazaninabidky' room.id %}">Smazat nabídku práce</a>
             <span>@{{room.host.username}}</span>
             <h5><a href="/Nabidky/room/{{room.id}}">{{room.Nazev_pozice}}</a></h5>
             <small>{{room.typprace.name}}</small>
