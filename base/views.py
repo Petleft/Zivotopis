@@ -1,4 +1,3 @@
-from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from .models import Room
 from .forms import RoomForm
@@ -31,7 +30,7 @@ def Studium(request, pk):
     Studs = None
     for i in stud:
         if i['id'] == int(pk):
-            Studs= i
+            Studs = i
     context = {'stud': stud}
     return render(request, 'Studium.html', context)
 
@@ -72,10 +71,10 @@ def Vytvornabidku(request):
         form = RoomForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('Nabidkyprace')
+            return redirect('/Nabidky/0')
 
     context = {'form': form}
-    return render(request, 'base/uprava_nabidky.html', context)
+    return render(request, 'uprava_nabidky.html', context)
 
 
 def Upraveninabidky(request, pk):
@@ -86,17 +85,19 @@ def Upraveninabidky(request, pk):
         form = RoomForm(request.POST, instance=room)
         if form.is_valid:
             form.save()
-            return redirect('/')
+            return redirect('/Nabidky/0')
     context = {'form': form}
-    return render(request, 'base/uprava_nabidky.html', context)
+    return render(request, 'uprava_nabidky.html', context)
 
 
 def Smazaninabidky(request, pk):
     room = Room.objects.get(id=pk)
     if request.method == 'POST':
+        room = Room.objects.get(id=pk)
         room.delete()
-        return redirect('Domovskástránka')
-    return render(request, 'base/Vymazani.html', {'obj': room})
+        return redirect('/Nabidky/0')
+    context = {'obj': room}
+    return render(request, 'Vymazani.html', context)
 
 
 nab = [
