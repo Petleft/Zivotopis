@@ -15,6 +15,13 @@
     <div>
         <h4>Druhy nabídek práce.</h4>
         <hr>
+        {% for Typ in Typs %}
+            <div>
+                <a href="{% url '/Nabidky/0' %}?q={{Typ.name}}">{{Typ.name}}</a>
+            </div>
+
+        {% endfor %}
+
     </div>
 
     <div>

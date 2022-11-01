@@ -55,7 +55,9 @@ def Zajmy(request, pk):
 
 def Nabidky(request, pk):
     rooms = Room.objects.all()
-    context = {'rooms': rooms}
+    #Typs = Room.typ_práce.objects.all()
+
+    context = {'rooms': rooms, } #'Typs': Typs
     return render(request, 'Nabidky.html', context)
 
 

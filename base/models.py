@@ -37,6 +37,11 @@ class Hodinym(models.Model):
     def __str__(self):
         return self.name
 
+class typprace(models.Model):
+    name = models.CharField(max_length=30)
+
+    def str(self):
+        return self.name
 
 #class Room(models.Model):
 #    host = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
