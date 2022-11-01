@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Room
+from .models import Room, typprace
 from .forms import RoomForm
 
 
@@ -54,10 +54,11 @@ def Zajmy(request, pk):
 
 
 def Nabidky(request, pk):
-    rooms = Room.objects.all()
-    #Typs = Room.typ_práce.objects.all()
+    q = request.GET.get('q') if request.GET.get('q') != None else ''
+    rooms = Room.objects.filter(typ_práce__name__icontains=q)
+    Typs = typprace.objects.all()
 
-    context = {'rooms': rooms, } #'Typs': Typs
+    context = {'rooms': rooms, 'Typs': Typs }
     return render(request, 'Nabidky.html', context)
 
 

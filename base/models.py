@@ -40,7 +40,7 @@ class Hodinym(models.Model):
 class typprace(models.Model):
     name = models.CharField(max_length=30)
 
-    def str(self):
+    def __str__(self):
         return self.name
 
 #class Room(models.Model):
@@ -54,6 +54,7 @@ class typprace(models.Model):
 #    description = models.TextField(null=True, blank=True)
 #    updated = models.DateTimeField(auto_now=True)
 #    created = models.DateTimeField(auto_now_add=True)
+# 
 #
 #    def __str__(self):
 #        return self.name
@@ -61,7 +62,7 @@ class typprace(models.Model):
 
 class Room(models.Model):
     Zadávající = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-    typ_práce = models.CharField(max_length=30)
+    typ_práce = models.ForeignKey(typprace, on_delete=models.SET_NULL, null=True)
     Nazev_pozice = models.CharField(max_length=20)
     Hodinový_plat = models.CharField(max_length=10, blank=True)
     Měsíční_mzda = models.CharField(max_length=10, blank=True)
