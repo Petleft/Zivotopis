@@ -7,4 +7,10 @@
 
 </form>
 
+{% if request.user.is_authenticated %}
+<p> Vítejte {{request.user}}</p>
+<a href="{% url 'logout' %}">Odhlásit</a>
+{% else %}
+<a href="{% url 'login' %}"> Přihlásit</a>
+{% endif %}
 <hr>
