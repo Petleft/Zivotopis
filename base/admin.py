@@ -4,7 +4,7 @@ from django.contrib import admin
 
 from .models import Room, Typ, Plath, Platm, Hodinyd, Hodinym, typprace
 
-
+#setup admin page what will show in admin pannels
 admin.site.register(Room)
 admin.site.register(Typ)
 admin.site.register(Platm)

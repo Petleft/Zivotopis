@@ -1,6 +1,7 @@
 from django.urls import path
 from . import views
 
+#setup url mapping for our website 
 urlpatterns = [
     path('login/', views.loginPage, name="login"),
     path('logout/', views.logoutUser, name="logout"),

@@ -9,18 +9,20 @@
         {% csrf_token %}
 
         <label>Uživatel:</label>
-        <input type="text" name="Username" placeholder="Enter username..." />
+        <input type="text" name="username" placeholder="Enter username..." />
         <label>Heslo:</label>
-        <input type="password" name="Password" placeholder="Enter password..." />
+        <input type="password" name="password" placeholder="Enter password..." />
 
 
         <input type="submit" value="Login" />
-
     </form>
+
     <p>Ještě jste se nezaregistrovali?</p>
     <a href="{% url 'register' %}">Zaregistrovat.</a>
 </div>
+
 {% else %}
+
 <div>
     <form method="POST" action="">
         {% csrf_token %}

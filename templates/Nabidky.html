@@ -38,7 +38,7 @@
         <div>
             {% for room in rooms %}
             <div>
-                {% if request.user == room.Zadávající %}
+                {% if request.user == room.Zadávající %} # setup that only users that created their offer will see update and delete offer next to their offers
                 <a href="{% url 'Upraveninabidky' room.id %}">Upravit nabídku práce</a>
                 <a href="{% url 'Smazaninabidky' room.id %}">Smazat nabídku práce</a>
                 {% endif %}

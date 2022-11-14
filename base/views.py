@@ -6,17 +6,17 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
-from .models import Room, typprace
+from .models import Room, typprace, Message
 from .forms import RoomForm
 
-
+#Login page setup
 def loginPage(request):
     page = 'login'
     if request.user.is_authenticated:
         return redirect('Domovskástránka')
 
     if request.method == 'POST':
-        username = request.POST.get('username').lower()
+        username = request.POST.get('username')
         password = request.POST.get('password')
 
         try:
@@ -35,16 +35,16 @@ def loginPage(request):
     context = {'page': page}
     return render(request, 'base/login_register.html', context)
 
-
+# setup logout button
 def logoutUser(request):
     logout(request)
     return redirect('Domovskástránka')
 
-
+# setup register button
 def registerUser(request):
     page = 'register'
     form = UserCreationForm()
-
+# setup register form from django forms
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
@@ -57,12 +57,12 @@ def registerUser(request):
             messages.error(request, "Nastala chyba při registraci, zkuste se registrovat znovu!")
     return render(request, 'base/login_register.html', {'form': form})
 
-
+#Home page view
 def Home(request):
     context = {'infoome': infoome , 'prac': prac, 'stud': stud, 'vlas': vlas, 'zaj': zaj, 'nab': nab}
     return render(request, 'base/home.html', context)
 
-
+# def  page about me
 def Me(request, pk):
     me = None
     for i in infoome:
@@ -71,7 +71,7 @@ def Me(request, pk):
     context = {'me': me}
     return render(request, 'Infoome.html', context)
 
-
+# def page about working experience
 def Pracovnizkus(request, pk):
     Prac = None
     for i in prac:
@@ -80,7 +80,7 @@ def Pracovnizkus(request, pk):
     context = {'Prac': Prac}
     return render(request, 'Pracovnizkusenosti.html', context)
 
-
+# def page about my studies
 def Studium(request, pk):
     Studs = None
     for i in stud:
@@ -89,7 +89,7 @@ def Studium(request, pk):
     context = {'stud': stud}
     return render(request, 'Studium.html', context)
 
-
+# def page about my atributes
 def Vlastnosti(request, pk):
     Vlas = None
     for i in vlas:
@@ -98,7 +98,7 @@ def Vlastnosti(request, pk):
     context = {'Vlas': Vlas}
     return render(request, 'Vlastnosti.html', context)
 
-
+#def page about my hobbys
 def Zajmy(request, pk):
     Zajm = None
     for i in zaj:
@@ -107,7 +107,7 @@ def Zajmy(request, pk):
     context = {'Zajm': Zajm}
     return render(request, 'Zájmy.html', context)
 
-
+# def page for adding and managing jobs offers
 def Nabidky(request, pk):
     q = request.GET.get('q') if request.GET.get('q') != None else ''
 
@@ -122,12 +122,23 @@ def Nabidky(request, pk):
     context = {'rooms': rooms, 'Typs': Typs, 'room_count': room_count }
     return render(request, 'Nabidky.html', context)
 
-
+# def room where will be the job offer shown
 def room(request, pk):
     room = Room.objects.get(id=pk)
-    context = {'room': room}
+    room_messages = room.message_set.all().order_by('-created')
+    dotazující = room.dotazující.all()
+    if request.method == 'POST':
+        message = Message.objects.create(
+            user= request.user,
+            room= room,
+            body= request.POST.get('body')
+        )
+        return redirect('room', pk=room.id)
+
+    context = {'room': room, 'room_messages': room_messages, 'dotazující': dotazující}
     return render(request, 'room.html', context)
 
+# setup requirement to login user for him to add a offer
 @login_required(login_url='login')
 def Vytvornabidku(request):
     form = RoomForm()
@@ -140,14 +151,15 @@ def Vytvornabidku(request):
     context = {'form': form}
     return render(request, 'uprava_nabidky.html', context)
 
+# setup requirement to login user for him to change offer
 @login_required(login_url='login')
 def Upraveninabidky(request, pk):
     room = Room.objects.get(id=pk)
     form = RoomForm(instance=room)
-
+# only user that created the offer can change atributes about it
     if request.user != room.Zadávající:
         return HttpResponse('Nemáte oprávnění upravovat cizí nabídky práce!!')
-
+#save offer update
     if request.method == 'POST':
         form = RoomForm(request.POST, instance=room)
         if form.is_valid:
@@ -156,10 +168,11 @@ def Upraveninabidky(request, pk):
     context = {'form': form}
     return render(request, 'uprava_nabidky.html', context)
 
+# setup requirement to login user for him to delete offer
 @login_required(login_url='login')
 def Smazaninabidky(request, pk):
     room = Room.objects.get(id=pk)
-
+#setup that only user that created offer can delete it
     if request.user != room.Zadávající:
         return HttpResponse('Nemáte oprávnění upravovat cizí nabídky práce!!')
 
@@ -170,6 +183,8 @@ def Smazaninabidky(request, pk):
     return render(request, 'Vymazani.html', context)
 
 
+
+# not needed will delete
 nab = [
     {'id':0, 'name': 'Seznam nabídek práce'},
 ]
